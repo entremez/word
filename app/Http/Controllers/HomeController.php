@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function welcome()
     {
 
-        return view('welcome');
+        return view('home');
     }
 
     public function data()
@@ -44,6 +44,14 @@ class HomeController extends Controller
         $data = substr($data, 0, -1);
         $data .= ']';
         return json_encode($data);
+    }
+
+    public function potenza()
+    {
+
+        return view('potenza',[
+            'certificados' => Certificado::all()
+        ]);
     }
 
 

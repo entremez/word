@@ -16,3 +16,4 @@
 Route::get('/word', 'HomeController@generateDocx');
 Route::get('/', 'HomeController@welcome');
 Route::get('/json', 'HomeController@data');
+Route::get('/potenza', 'HomeController@potenza');
