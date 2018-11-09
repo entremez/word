@@ -13,7 +13,9 @@
 
 
 
-Route::get('/word', 'HomeController@generateDocx');
+Route::get('/word/{id}', 'HomeController@generateDocx')->name('toWord');
 Route::get('/', 'HomeController@welcome');
 Route::get('/json', 'HomeController@data');
-Route::get('/potenza', 'HomeController@potenza');
+Route::get('/potenza', 'PotenzaController@show');
+Route::get('/importar', 'HomeController@import');
+Route::post('/importar', 'HomeController@importExcel');

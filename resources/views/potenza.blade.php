@@ -5,16 +5,28 @@
 <table id="tabla" class="display">
     <thead>
         <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
+            <th>OSE</th>
+            <th>OCP</th>
+            <th>Cliente</th>
+            <th>Modelo</th>
+            <th>Lote</th>
+            <th>Certificado</th>
+            <th>Sol.</th>
+            <th>Cert.</th>
         </tr>
     </thead>
     <tbody>
 
-   	@foreach ($certificados as $user)
+   	@foreach ($oses as $user)
 		<tr>
-            <td>{{$user->cliente}}</td>
-            <td>{{$user->modelo}}</td>
+            <td>{{$user->oti}}</td>
+            <td>{{utf8_decode($user->direccion_empresa)}}</td>
+            <td>{{$user->solicitante}}</td>
+            <td>{{$user->rut_empresa}}</td>
+            <td>{asdasd</td>
+            <td>asdasd</td>
+            <td class="text-center"><a href="{{ route('toWord', $user->id)}}"><i class="far fa-file-word"></i></a></td>
+            <td class="text-center"><a href="{{ route('toWord', $user->id)}}"><i class="far fa-file-word"></i></a></td>
         </tr>
 
 
@@ -23,10 +35,5 @@
     </tbody>
 </table>
 </div>
-
-
-
-
-
 
 @endsection

@@ -5,17 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Certificado;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\CertificadosImport;
 
 class HomeController extends Controller
 {
-    public function generateDocx()
+
+    private $excel;
+
+    public function __construct(Excel $excel)
     {
-    	 $template = new \PhpOffice\PhpWord\TemplateProcessor('template.docx');
+        $this->excel = $excel;
+    }
 
-         $template->setValue('numberOfCertificate','8511261-15');
+    public function generateDocx($id)
+    {
+        $certificado = Certificado::find($id);
+    	 $template = new \PhpOffice\PhpWord\TemplateProcessor('template2.docx');
 
-         $template->setValue('test','8511261-15');
-    	 $template->setValue('address', 'Alcántara N° 44, Piso 7, Las Condes, Santiago Alcántara N° 44, Piso 7, Las Condes, Santiago Alcántara N° 44, Piso 7, Las Condes, Santiago');
+
+         $template->setValue('certificado',$certificado->certificado);
+         $template->setValue('seguimiento',$certificado->seguimiento);
+
 
     	 $name = 'nombre.docx';
 
@@ -30,7 +41,6 @@ class HomeController extends Controller
 
     public function welcome()
     {
-
         return view('home');
     }
 
@@ -48,10 +58,22 @@ class HomeController extends Controller
 
     public function potenza()
     {
-
         return view('potenza',[
             'certificados' => Certificado::all()
         ]);
+    }
+
+    public function import()
+    {
+        return view('import');
+    }
+
+    public function importExcel(Request $request)
+    {
+
+        Excel::import(new CertificadosImport, $request->file('excel'));
+        return redirect('/potenza')->with('success', 'All good!');
+
     }
 
 
